@@ -1,5 +1,9 @@
 package states;
 
+import modcharting.ModchartFuncs;
+import modcharting.NoteMovement;
+import modcharting.PlayfieldRenderer;
+
 import backend.Highscore;
 import backend.StageData;
 import backend.WeekData;
@@ -191,6 +195,7 @@ class PlayState extends MusicBeatState
 	public static var chartingMode:Bool = false;
 
 	//Gameplay settings
+	public var backupGpu:Bool;
 	public var healthGain:Float = 1;
 	public var healthLoss:Float = 1;
 
@@ -294,6 +299,7 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.stop();
 
 		// Gameplay settings
+		backupGpu = ClientPrefs.data.cacheOnGPU;
 		healthGain = ClientPrefs.getGameplaySetting('healthgain');
 		healthLoss = ClientPrefs.getGameplaySetting('healthloss');
 		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill');
@@ -518,6 +524,9 @@ class PlayState extends MusicBeatState
 
 		generateSong(SONG.song);
 
+		playfieldRenderer = new PlayfieldRenderer(strumLineNotes, notes, this);
+		playfieldRenderer.cameras = [camHUD];
+		add(playfieldRenderer);
 		noteGroup.add(grpNoteSplashes);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -977,6 +986,7 @@ class PlayState extends MusicBeatState
 
 			generateStaticArrows(0);
 			generateStaticArrows(1);
+			NoteMovement.getDefaultStrumPos(this);
 			for (i in 0...playerStrums.length) {
 				setOnScripts('defaultPlayerStrumX' + i, playerStrums.members[i].x);
 				setOnScripts('defaultPlayerStrumY' + i, playerStrums.members[i].y);
@@ -3066,6 +3076,7 @@ class PlayState extends MusicBeatState
 	}
 
 	override function destroy() {
+		ClientPrefs.data.cacheOnGPU = backupGpu;
 		#if LUA_ALLOWED
 		for (lua in luaArray)
 		{
