@@ -1,6 +1,8 @@
 #if LUA_ALLOWED
 package psychlua;
 
+import modcharting.ModchartFuncs;
+
 import backend.WeekData;
 import backend.Highscore;
 import backend.Song;
@@ -55,6 +57,11 @@ class FunkinLua {
 	public var scriptName:String = '';
 	public var modFolder:String = null;
 	public var closed:Bool = false;
+	public static var instance:FunkinLua = null;
+    #if desktop
+	DiscordClient.addLuaCallbacks(this);
+	#end
+    ModchartFuncs.loadLuaFunctions(this);
 
 	#if HSCRIPT_ALLOWED
 	public var hscript:HScript = null;
