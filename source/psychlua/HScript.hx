@@ -83,6 +83,24 @@ class HScript extends SScript
 	override function preset() {
 		super.preset();
 
+		set('Math', Math);
+		setClass(modcharting.ModchartEditorState);
+		setClass(modcharting.ModchartEvent);
+		setClass(modcharting.ModchartEventManager);
+		setClass(modcharting.ModchartFile);
+		setClass(modcharting.ModchartFuncs);
+		setClass(modcharting.ModchartMusicBeatState);
+		setClass(modcharting.ModchartUtil);
+		setClass(modcharting.Modifier); //the game crashes without this???????? what??????????? -- fue glow
+		setClass(modcharting.Modifier.ModifierSubValue);
+		setClass(modcharting.ModTable);
+		setClass(modcharting.NoteMovement);
+		setClass(modcharting.NotePositionData);
+		setClass(modcharting.Playfield);
+		setClass(modcharting.PlayfieldRenderer);
+		setClass(modcharting.SimpleQuaternion);
+		setClass(modcharting.SustainStrip);
+		modcharting.ModchartFuncs.loadHScriptFunctions(this);
 		// Some very commonly used classes
 		set('FlxG', flixel.FlxG);
 		set('FlxMath', flixel.math.FlxMath);
@@ -369,6 +387,11 @@ class HScript extends SScript
 			varsToBring = null;
 		}
 	}
+
+    public function initMod(mod:modcharting.Modifier)
+    {
+	   call("initMod", [mod]);
+    }
 
 	public function executeCode(?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):TeaCall {
 		if (funcToRun == null) return null;
