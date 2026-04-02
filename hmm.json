@@ -76,6 +76,13 @@
       "dir": null,
       "ref": "dev",
       "url": "https://github.com/ShadowMario/flxanimate.git"
+    },
+    {
+      "name": "FNF-Modcharting-Tools",
+      "type": "git",
+      "dir": null,
+      "ref": "main",
+      "url": "https://github.com/EdwhakKB/FNF-Modcharting-Tools.git"
     }
   ]
 }
