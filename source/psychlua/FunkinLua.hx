@@ -58,9 +58,11 @@ class FunkinLua {
 	public var modFolder:String = null;
 	public var closed:Bool = false;
 	public static var instance:FunkinLua = null;
+	
     #if desktop
 	DiscordClient.addLuaCallbacks(this);
 	#end
+		
     ModchartFuncs.loadLuaFunctions(this);
 
 	#if HSCRIPT_ALLOWED
