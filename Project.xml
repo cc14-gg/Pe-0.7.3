@@ -30,7 +30,6 @@
 	<define name="VIDEOS_ALLOWED" if="desktop || mobile" unless="32bits || hl || NOVIDEO || rpi"/> <!-- i'll keep this cuz it makes vscode think i don't use videos -->
 	<define name="PSYCH" />
 	<define name="PSYCHVERSION" value="0.7.3"/>
-	<haxelib name="fnf-modcharting-tools" />
 
 	<section if="officialBuild">
 		<define name="TITLE_SCREEN_EASTER_EGG"/>
@@ -111,6 +110,8 @@
 	<!-- Enables a terminal log prompt on debug builds -->
 	<haxelib name="hxcpp-debug-server" if="debug"/>
 	<haxedef name="HXC_LIBVLC_LOGGING" if="VIDEOS_ALLOWED debug" />
+
+	<haxelib name="fnf-modcharting-tools" />
 	
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
